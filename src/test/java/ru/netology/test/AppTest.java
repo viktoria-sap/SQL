@@ -18,10 +18,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class AppTest {
     SqlUtils mySql = new SqlUtils();
 
- @BeforeEach
- void setUp() {
-     open("http://localhost:9999");
- }
+    @BeforeEach
+    void setUp() {
+        open("http://localhost:9999");
+    }
 
     @Test
     void shouldCheckLogin() throws SQLException {
@@ -46,6 +46,6 @@ public class AppTest {
 
     @AfterAll
     static void close() throws SQLException {
-     SqlUtils.cleanDb();
+        SqlUtils.cleanDb();
     }
 }
