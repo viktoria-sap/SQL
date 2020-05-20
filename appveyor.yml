@@ -1,0 +1,16 @@
+image: Ubuntu1804
+
+branches:
+  only:
+    - master
+stack: jdk 11
+build: off
+
+install:
+  - ps: $App = Start-Process -FilePath java -ArgumentList "-jar ./artifacts/app-deadline.jar" -PassThru
+
+build_script:
+  - ps: ./gradlew test --info "-Dselenide.headless=true"
+
+on_finish:
+  - ps: Stop-Process -Id $App.Id
