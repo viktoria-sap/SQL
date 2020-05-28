@@ -8,8 +8,9 @@ public class VerificationPage {
     private SelenideElement verificationField = $("input[name='code']");
     private SelenideElement verifyButton = $("[data-test-id=action-verify]");
 
-    public void verify(String code) {
+    public DashboardPage verify(String code) {
         verificationField.setValue(code);
         verifyButton.click();
-    }
+        return new DashboardPage();
+        }
 }

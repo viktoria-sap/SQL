@@ -9,7 +9,7 @@ import java.sql.SQLException;
 public class SqlUtils {
     public static Connection getConnection() throws SQLException {
         final Connection connection = DriverManager.getConnection(
-                "jdbc:mysql:/localhost:3306/app", "app", "pass");
+                "jdbc:mysql:/127.0.0.1:3306/app", "app", "pass");
         return connection;
     }
 
@@ -41,12 +41,12 @@ public class SqlUtils {
         return code;
     }
 
-    public String getStatusFromDb() throws SQLException {
+    public String getStatusFromDb(String login) throws SQLException {
         String statusSQL = "SELECT status FROM users WHERE login = ?;";
         String status = null;
         try (val conn = getConnection();
              val statusStmt = conn.prepareStatement(statusSQL);) {
-            statusStmt.setString(1, "vasya");
+            statusStmt.setString(1, login);
             try (val rs = statusStmt.executeQuery()) {
                 if (rs.next()) {
                     status = rs.getString("status");

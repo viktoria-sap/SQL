@@ -29,8 +29,8 @@ public class AppTest {
         val authInfo = DataHelper.getValidAuthInfo();
         val verificationPage = loginPage.validLogin(authInfo);
         val verificationCode = SqlUtils.getVerificationCode();
-        verificationPage.verify(verificationCode);
-        $("h2[data-test-id='dashboard']").shouldBe(Condition.visible);
+        val verify = verificationPage.verify(verificationCode);
+        verify.checkIfVisible();
     }
 
     @Test
@@ -38,9 +38,11 @@ public class AppTest {
         val loginPage = new LoginPage();
         val authInfo = DataHelper.getAuthInfoInvalidPassword();
         loginPage.validLogin(authInfo);
+        loginPage.cleanLoginFields();
         loginPage.validLogin(authInfo);
+        loginPage.cleanLoginFields();
         loginPage.validLogin(authInfo);
-        val statusSQL = mySql.getStatusFromDb();
+        val statusSQL = mySql.getStatusFromDb(authInfo.getLogin());
         assertEquals("blocked", statusSQL);
     }
 

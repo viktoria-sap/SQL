@@ -15,5 +15,7 @@ docker-compose up -d
 java -jar ./artifacts/app-deadline.jar
 ```
 * Запустить тесты
-![1](./play.png)
+`gradlew clean test`
+
+* Перед повторным запуском, приложение должно быть перезапущено.
 
